@@ -24,9 +24,9 @@ import random
 
 
 def main():
-    global level
     try:
         cont = ''
+        stop = 's'
         correct = 0
         wrong = 0
         question_no = 1
@@ -41,8 +41,7 @@ def main():
                 level = int(input("Enter Level [1 - 4]: "))
         except ValueError:
             print("Try Again and Enter a value between 1 and 4\n")
-
-        while cont == '':
+        while (cont == 'q' or cont == '') and stop != '':
             num1 = choose_level(level)  # get random number from chooseLevel function, based on the level passed.
             num2 = choose_level(level)  # get random number from chooseLevel function, based on the level passed.
 
@@ -73,7 +72,10 @@ def main():
                     print(f'Wrong :(\n'
                           f'{result} is the correct answer')
                     wrong += 1
-                cont = input("Press 'Enter' to continue or any other key to stop")
+                cont = input("Press 'Enter' to continue or 'q' to stop")
+                if cont == 'q':
+                    display_result(correct, wrong)
+                    stop = input("Press 'Enter' to quit")
 
             elif operator == 2:     # if operator is 2, give multiplication
                 if num1 < num2:
@@ -95,7 +97,10 @@ def main():
                     print(f'Wrong :(\n'
                           f'{result} is the correct answer')
                     wrong += 1
-                cont = input("Press 'Enter' to continue or any other key to stop ")
+                cont = input("Press 'Enter' to continue or 'q' to stop ")
+                if cont == 'q':
+                    display_result(correct, wrong)
+                    stop = input("Press 'Enter' to quit")
 
             elif operator == 3:     # if operator is 3, give subtraction
                 print(f'  {num1:^4}\n'
@@ -111,8 +116,10 @@ def main():
                     print(f'Wrong :(\n'
                           f'{result} is the correct answer')
                     wrong += 1
-                cont = input("Press 'Enter' to continue or any other key to stop ")
-
+                cont = input("Press 'Enter' to continue or 'q' to stop ")
+                if cont == 'q':
+                    display_result(correct, wrong)
+                    stop = input("Press 'Enter' to quit")
             elif operator == 4:     # if operator is 4, give division
                 print(f'  {num1} // {num2}')
                 result = num1 // num2
@@ -126,7 +133,10 @@ def main():
                     print(f'Wrong :(\n'
                           f'{result} is the correct answer')
                     wrong += 1
-                cont = input("Press 'Enter' to continue or any other key to stop ")
+                cont = input("Press 'Enter' to continue or 'q' to stop ")
+                if cont == 'q':
+                    display_result(correct, wrong)
+                    stop = input("Press 'Enter' to quit")
 
             elif operator == 5:     # if operator is 5, give modulo.
                 print(f'  {num1} % {num2}')
@@ -141,16 +151,12 @@ def main():
                     print(f'Wrong :(\n'
                           f'{result} is the correct answer')
                     wrong += 1
-                cont = input("Press 'Enter' to continue or any other key to stop ")
-
+                cont = input("Press 'Enter' to continue or 'q' to stop ")
+                if cont == 'q':
+                    display_result(correct, wrong)
+                    stop = input("Press 'Enter' to quit")
     except Exception as err:
         print(err)
-
-    else:
-        percentage = (correct / (correct + wrong)) * 100
-        print(f'You got {correct} questions correctly')
-        print(f'You got {wrong} questions wrong')
-        print(f'Your percentage is {percentage:.0f}%')
 
 
 def choose_level(level):
@@ -187,6 +193,13 @@ def intro_message():
           f"'*' means multiplication\n"
           f"'%' means modulo or remainder division\n"
           f"Goodluck!\n")
+
+
+def display_result(correct, wrong):
+    percentage = (correct / (correct + wrong)) * 100
+    print(f'You got {correct} questions correctly')
+    print(f'You got {wrong} questions wrong')
+    print(f'Your percentage is {percentage:.0f}%')
 
 
 main()
