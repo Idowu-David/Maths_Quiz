@@ -194,12 +194,12 @@ def intro_message():
           f"'%' means modulo or remainder division\n"
           f"Goodluck!\n")
 
-
 def display_result(correct, wrong):
     percentage = (correct / (correct + wrong)) * 100
     print(f'You got {correct} questions correctly')
     print(f'You got {wrong} questions wrong')
     print(f'Your percentage is {percentage:.0f}%')
 
+if __name__ == '__main__':
+    main()
 
-main()
